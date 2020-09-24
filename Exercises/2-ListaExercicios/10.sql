@@ -1,3 +1,5 @@
-SELECT * FROM compras 
-WHERE valor >= 1000 AND 
-valor <= 3000 OR  valor > 5000;
+SELECT * 
+FROM compras 
+WHERE valor 
+BETWEEN 1000 AND 3000 
+OR valor > 5000;

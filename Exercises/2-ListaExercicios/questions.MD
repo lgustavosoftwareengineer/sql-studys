@@ -17,16 +17,16 @@
 4. Selecione todas as compras cuja data seja maior-ou-igual que 15/12/2012 e menor do que 15/12/2014.
    R -
    ```SQL
-       SELECT * FROM compras
-        WHERE valor > 1000
-        AND valor < 5000;
+         SELECT * FROM compras
+         WHERE valor > 1000
+         AND valor < 5000;
    ```
 5. Selecione todas as compras cujo valor esteja entre R$15,00 e R$35,00 e a observação comece com a palavra 'Lanchonete'.
    R -
    ```SQL
-       SELECT * FROM compras
-           WHERE valor >= 15 AND valor <= 35
-           AND observacoes LIKE "Lanchonete";
+         SELECT * FROM compras
+         WHERE valor >= 15 AND valor <= 35
+         AND observacoes LIKE "Lanchonete";
    ```
 6. Selecione todas as compras que já foram recebidas.
    R -

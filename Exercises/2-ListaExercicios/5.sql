@@ -1,3 +1,5 @@
-SELECT * FROM compras
-WHERE valor >= 15 AND valor <= 35 
-AND observacoes LIKE "Lanchonete";
+SELECT * 
+FROM compras
+WHERE valor BETWEEN 15 AND 35 
+AND observacoes LIKE "Lanchonete%";
+
