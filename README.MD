@@ -1,3 +1,3 @@
 ## Link to the repository official of the book
 
-- https://github.com/josemalcher/SQL-e-Modelagem-com-Banco-de-Dados-Livro-Alura/tree/master/2-ListaExercicios
+- https://github.com/josemalcher/SQL-e-Modelagem-com-Banco-de-Dados-Livro-Alura
