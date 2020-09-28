@@ -1,0 +1,1 @@
+SELECT * FROM compras WHERE NOT valor = 108.00;
