@@ -1,0 +1,54 @@
+/*ADICIONANDO UMA COLUNA CHAMADA COMPRADOS*/
+ALTER TABLE compras ADD COLUMN comprador VARCHAR(200);
+
+/*ADICIONANDO UM COMPRADOR AS MINHAS COMPRAS*/
+UPDATE compras SET comprador = 'Luiz Gustavo' WHERE id = 1;
+
+/*CRIANDO UMA TABELA PARA COMPRADOR*/
+CREATE TABLE compradores(
+id INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(200),
+endereco VARCHAR(200),
+telefone VARCHAR(200)
+);
+
+/*INSERINDO COMPRADORES */ 
+INSERT INTO compradores (nome, endereco, telefone) VALUES (
+'Luiz Gustavo',
+'Rua Pascoal Lopes, Garanhuns',
+'(81) 9.9657-2193'
+); 
+
+INSERT INTO compradores (nome, endereco, telefone) VALUES (
+'Cicero Matias',
+'Rua José Luiz de Melo, Palmares',
+'(81) 9.9990-2336'
+)
+
+/*EXCLUINDO A COLUNA COMPRADOR NA TABELA COMPRAS*/
+ALTER TABLE compras DROP COLUMN comprador;
+
+/*ADICIONANDO UMA COLUNA CHAMADA 'id_compradores' NA TABELA COMPRAS*/
+ALTER TABLE compras ADD COLUMN id_compradores int;
+
+/*LISTANDO A QUANTIDADE DE COMPRAS DA TABELA*/
+SELECT COUNT(*) FROM compras;
+
+/*ADICIONANDO UM COMPRADOR PARA METADE DA TABELA E OUTRO PARA A OUTRA METADE*/
+UPDATE compras SET id_compradores = 1 WHERE id < 21;
+UPDATE compras SET id_compradores = 2 WHERE id > 20;
+
+/*LISTANDO INFORMAÇÕES DE DUAS TABELAS DIFERENTES EM SOMENTE UMA QUERY*/
+SELECT * FROM compras, compradores; 
+
+/*UTILIZANDO A CHAVE ESTRANGEIRA 'id_compradores' NA TABELA 'compras' PARA FAZER UMA UNIÃO ('JOIN') COM A TABELA 'compradores'*/
+SELECT * FROM compras JOIN compradores on compras.id_compradores = compradores.id;
+
+/*ADICIONANDO UM CONSTRAINS PARA A CHAVE ESTRANGEIRA NA TABELA COMPRAS PARA SÓ PODER SER ADICIONADO UM COMPRADOR QUE EXISTA NA TABELA COMPRADORES*/
+ALTER TABLE compras ADD CONSTRAINT fk_compradores FOREIGN KEY (id_compradores) REFERENCES compradores(id);
+
+/*DETERMINANDO VALORES FIXOS NA TABELA COMPRAS COMO 'ENUM'*/
+ALTER TABLE compras ADD COLUMN forma_pagto ENUM('BOLETO', 'CREDITO');
+
+/*TENTANDO ADICIONAR UM VALOR DIFENTE DOS LIMITADOS NA COLUNA 'forma_pagto'*/
+INSERT INTO compras (obs, valor, forma_pagto) VALUES ('Bola de futebol', 80, 'DINHEIRO');
