@@ -21,5 +21,5 @@
    R -
 
    ```SQL
-      SELECT SUM(valor) AS 'SUM OF THE ITENS', recebida FROM compras GROUP BY recebida;
+      SELECT SUM(valor) AS 'SUM OF THE ITENS', recebida AS 'RECEIVED' FROM compras GROUP BY recebida;
    ```
