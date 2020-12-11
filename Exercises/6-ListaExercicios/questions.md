@@ -104,3 +104,59 @@
       JOIN compradores ON compras.id_compradores = compradores.id
       GROUP BY compradores.nome;
    ```
+
+9. A tabela compras foi alterada para conter uma FOREIGN KEY referenciando a coluna id da tabela compradores . O objetivo é deixar claro para o banco de dados que compras.id_compradores está de alguma forma relacionado com a tabela compradores através da coluna compradores.id . Mesmo sem criar a FOREIGN KEY é possível relacionar tabelas através do comando JOIN.
+
+   R -
+
+   ```
+      Sim, é possível. O FOREIGN KEY funciona somente para adicionar um constraints na tabela compras, de que só será possível adicionar um id de comprador existente na tabela compradores.
+   ```
+
+10. Qual a vantagem em utilizar a FOREIGN KEY?
+
+R -
+
+```
+   Ela adiciona um constraints na coluna referente a FOREIGN KEY na tabela compras de que só poderá ser adicionado um id existente na tabela a qual essa chave estrangeira faz alusão.
+```
+
+11. Crie uma coluna chamada "forma_pagto" do tipo ENUM e defina os valores: 'BOLETO' e 'CREDITO'.
+
+R -
+
+```SQL
+   ALTER TABLE compras ADD COLUMN forma_pagto ENUM('BOLETO', 'CREDITO');
+```
+
+12. Ative o strict mode na sessão que está utilizando para impossibilitar valores inválidos. Utilize o modo "STRICT_ALL_TABLES". E verifique se o SQL mode foi alterado fazendo um SELECT na sessão.
+
+R -
+
+```SQL
+
+```
+
+13. Tente inserir uma compra com forma de pagamento diferente de 'BOLETO' ou 'CREDITO', por exemplo, 'DINHEIRO' e verifique se o MySQL recusa a inserção.
+
+R -
+
+```SQL
+
+```
+
+14. Adicione as formas de pagamento para todas as compras por meio da instrução UPDATE.
+
+R -
+
+```SQL
+
+```
+
+15. Faça a configuração global do MySQL para que ele sempre entre no strict mode.
+
+R -
+
+```SQL
+
+```
