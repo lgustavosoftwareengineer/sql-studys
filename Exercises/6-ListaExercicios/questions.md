@@ -6,7 +6,7 @@
 
    ```SQL
       CREATE TABLE compradores(
-         id INT PRIMARY KEY AUTO_INCREMENT,
+         id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
          nome VARCHAR(255),
          endereco VARCHAR(255),
          telefone VARCHAR(255),
@@ -134,7 +134,8 @@ R -
 R -
 
 ```SQL
-
+   SET SESSION sql_mode = 'STRICT_ALL_TABLES';
+   SELECT @@SESSION.sql_mode; /*VERIFICANDO A MODIFICAÇÃO DO MODO*/
 ```
 
 13. Tente inserir uma compra com forma de pagamento diferente de 'BOLETO' ou 'CREDITO', por exemplo, 'DINHEIRO' e verifique se o MySQL recusa a inserção.
@@ -142,7 +143,8 @@ R -
 R -
 
 ```SQL
-
+   INSERT INTO compras (obs, valor, forma_pagto) VALUES ('Guloseimas', 20, 'DINHEIRO');
+   -- ERROR 1265 (01000): Data truncated for column 'forma_pagto' at row 1 --
 ```
 
 14. Adicione as formas de pagamento para todas as compras por meio da instrução UPDATE.
@@ -151,6 +153,12 @@ R -
 
 ```SQL
 
+   /*ATUALIZANDO PARTE DA TABELA PARA BOLETO*/
+   UPDATE compras SET forma_pagto = 'BOLETO' WHERE MOD(id, 2) != 0;
+
+   /*ATUALIZANDO PARTE DA TABELA PARA CREDITO*/
+   UPDATE compras SET forma_pagto = 'CREDITO' WHERE MOD(id, 2) = 0;
+
 ```
 
 15. Faça a configuração global do MySQL para que ele sempre entre no strict mode.
@@ -158,5 +166,6 @@ R -
 R -
 
 ```SQL
-
+   SET GLOBAL sql_mode = 'STRICT_ALL_TABLES';
+   SELECT @@GLOBAL.sql_mode;
 ```
