@@ -34,3 +34,22 @@ SELECT a.nome FROM aluno a WHERE NOT EXISTS (SELECT m.id FROM matricula m WHERE 
 
 /*RETORNANDO TODOS OS EXERCICIOS QUE NÃO FORA RESPONDIDOS*/
 SELECT * FROM exercicio e WHERE NOT EXISTS (SELECT r.id FROM resposta r WHERE e.id = r.exercicio_id);
+SELECT e.id, e.pergunta FROM exercicio e WHERE NOT EXISTS (SELECT r.id FROM resposta r WHERE r.exercicio_id = e.id);
+
+/*RETORNANDO TODOS OS CURSO QUE NÃO POSSUEM MATRÍCULA*/
+SELECT c.nome FROM curso c WHERE NOT EXISTS (SELECT m.id FROM matricula m WHERE m.curso_id = c.id);
+
+/*RETORNANDO TODOS OS ALUNOS E O CURSO JUNTO COM A MATRICULA*/
+SELECT a.nome as 'Nome do aluno', c.nome as 'Nome do curso' FROM aluno a 
+JOIN matricula m ON m.aluno_id = a.id
+JOIN curso c on m.curso_id = c.id;
+
+/*RETORNANDO TODOS OS ALUNOS QUE NÃO RESPONDERAM E QUE ESTÃO MATRICULADOS*/
+SELECT a.nome AS 'Nome do aluno', c.nome AS 'Nome do curso' FROM aluno a 
+JOIN matricula m ON m.aluno_id = a.id
+JOIN curso c ON m.curso_id = c.id
+WHERE NOT EXISTS(SELECT r.aluno_id FROM resposta r WHERE r.aluno_id = a.id);
+
+/*RETORNANDO TODOS OS ALUNOS MATRICULADOS QUE RESPONDERAM O EXERCICIO*/
+SELECT r.id, a.nome FROM aluno a JOIN resposta r ON r.aluno_id = a.id
+WHERE EXISTS(SELECT m.aluno_id FROM matricula m WHERE m.aluno_id = a.id);
